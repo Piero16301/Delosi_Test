@@ -24,7 +24,43 @@ void main() {
       homeCubit = MockHomeCubit();
     });
 
-    testWidgets('renders current matrix', (tester) async {
+    testWidgets('renders MatrixInputHome', (tester) async {
+      const matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ];
+      when(() => homeCubit.state).thenReturn(
+        const HomeState(matrix: matrix),
+      );
+      await tester.pumpApp(
+        BlocProvider.value(
+          value: homeCubit,
+          child: const HomeView(),
+        ),
+      );
+      expect(find.byKey(const Key('matrix_input_home')), findsOneWidget);
+    });
+
+    testWidgets('renders RotateButtonHome', (tester) async {
+      const matrix = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ];
+      when(() => homeCubit.state).thenReturn(
+        const HomeState(matrix: matrix),
+      );
+      await tester.pumpApp(
+        BlocProvider.value(
+          value: homeCubit,
+          child: const HomeView(),
+        ),
+      );
+      expect(find.byKey(const Key('rotate_button_home')), findsWidgets);
+    });
+
+    testWidgets('renders MatrixOutput', (tester) async {
       const matrix = [
         [1, 2, 3],
         [4, 5, 6],

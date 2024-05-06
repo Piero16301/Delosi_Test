@@ -56,6 +56,7 @@ class MatrixInputHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      key: const Key('matrix_input_home'),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
@@ -105,6 +106,7 @@ class RotateButtonHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
+      key: const Key('rotate_button_home'),
       builder: (context, state) => ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Theme.of(context).primaryColor,

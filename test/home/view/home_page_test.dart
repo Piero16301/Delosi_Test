@@ -33,9 +33,6 @@ void main() {
       when(() => homeCubit.state).thenReturn(
         const HomeState(matrix: matrix),
       );
-      when(() => homeCubit.state).thenReturn(
-        const HomeState(matrix: matrix),
-      );
       await tester.pumpApp(
         BlocProvider.value(
           value: homeCubit,

@@ -5,9 +5,9 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('HomeCubit', () {
     blocTest<HomeCubit, HomeState>(
-      'emite matriz rotada cuando se llama a rotateLeft',
+      'emite matriz rotada cuando se llama a rotateLeftTest',
       build: () => HomeCubit()..onInputChanged('[[1,2,3],[4,5,6],[7,8,9]]'),
-      act: (cubit) => cubit.rotateLeft(),
+      act: (cubit) => cubit.rotateLeftTest(),
       expect: () => [
         isA<HomeState>().having((state) => state.matrix, 'matrix', [
           [3, 6, 9],
@@ -18,9 +18,9 @@ void main() {
     );
 
     blocTest<HomeCubit, HomeState>(
-      'emite matriz rotada cuando se llama a rotateRight',
+      'emite matriz rotada cuando se llama a rotateRightTest',
       build: () => HomeCubit()..onInputChanged('[[1,2,3],[4,5,6],[7,8,9]]'),
-      act: (cubit) => cubit.rotateRight(),
+      act: (cubit) => cubit.rotateRightTest(),
       expect: () => [
         isA<HomeState>().having((state) => state.matrix, 'matrix', [
           [7, 4, 1],

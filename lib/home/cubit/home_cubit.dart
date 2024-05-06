@@ -88,4 +88,42 @@ class HomeCubit extends Cubit<HomeState> {
       emit(state.copyWith(processStatus: ProcessStatus.failure));
     }
   }
+
+  void rotateLeftTest() {
+    final matrix = state.input
+        .replaceAll(RegExp(r'\s+'), '')
+        .substring(2, state.input.length - 2)
+        .split('],[')
+        .map((e) => e.split(',').map(int.parse).toList())
+        .toList();
+
+    final rotatedMatrix = List.generate(
+      matrix[0].length,
+      (i) => List.generate(
+        matrix.length,
+        (j) => matrix[j][matrix[j].length - i - 1],
+      ),
+    );
+
+    emit(state.copyWith(matrix: rotatedMatrix));
+  }
+
+  void rotateRightTest() {
+    final matrix = state.input
+        .replaceAll(RegExp(r'\s+'), '')
+        .substring(2, state.input.length - 2)
+        .split('],[')
+        .map((e) => e.split(',').map(int.parse).toList())
+        .toList();
+
+    final rotatedMatrix = List.generate(
+      matrix[0].length,
+      (i) => List.generate(
+        matrix.length,
+        (j) => matrix[matrix.length - j - 1][i],
+      ),
+    );
+
+    emit(state.copyWith(matrix: rotatedMatrix));
+  }
 }

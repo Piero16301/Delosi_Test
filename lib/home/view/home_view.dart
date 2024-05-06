@@ -125,6 +125,7 @@ class MatrixOutputHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
+      key: const Key('matrix_output'),
       builder: (context, state) {
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),

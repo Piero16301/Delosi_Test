@@ -28,6 +28,17 @@ class HomeCubit extends Cubit<HomeState> {
             .toList(),
       );
 
+      // Comprobar si la matriz es cuadrada
+      if (matrix.length != matrix[0].length) {
+        emit(
+          state.copyWith(
+            processStatus: ProcessStatus.failure,
+            errorMessage: 'La matriz no es cuadrada',
+          ),
+        );
+        return;
+      }
+
       // Rotar la matriz
       final rotatedMatrix = await Future(
         () => List.generate(
@@ -48,7 +59,12 @@ class HomeCubit extends Cubit<HomeState> {
         ),
       );
     } catch (e) {
-      emit(state.copyWith(processStatus: ProcessStatus.failure));
+      emit(
+        state.copyWith(
+          processStatus: ProcessStatus.failure,
+          errorMessage: 'Error al rotar la matriz',
+        ),
+      );
     }
   }
 
@@ -64,6 +80,17 @@ class HomeCubit extends Cubit<HomeState> {
             .map((e) => e.split(',').map(int.parse).toList())
             .toList(),
       );
+
+      // Comprobar si la matriz es cuadrada
+      if (matrix.length != matrix[0].length) {
+        emit(
+          state.copyWith(
+            processStatus: ProcessStatus.failure,
+            errorMessage: 'La matriz no es cuadrada',
+          ),
+        );
+        return;
+      }
 
       // Rotar la matriz
       final rotatedMatrix = await Future(
@@ -85,7 +112,12 @@ class HomeCubit extends Cubit<HomeState> {
         ),
       );
     } catch (e) {
-      emit(state.copyWith(processStatus: ProcessStatus.failure));
+      emit(
+        state.copyWith(
+          processStatus: ProcessStatus.failure,
+          errorMessage: 'Error al rotar la matriz',
+        ),
+      );
     }
   }
 

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.delosi.test.app.delosi_test">
+    package="com.delosi.test.app">
    <application
         android:label="${appName}"
         android:name="${applicationName}"

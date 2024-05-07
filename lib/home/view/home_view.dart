@@ -129,58 +129,54 @@ class MatrixOutputHome extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
       key: const Key('matrix_output'),
       builder: (context, state) {
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 500),
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            return FadeTransition(opacity: animation, child: child);
-          },
-          child: _buildChild(context, state),
-        );
-      },
-    );
-  }
-
-  Widget _buildChild(BuildContext context, HomeState state) {
-    if (state.processStatus.isInitial) {
-      return const Center(
-        child: Text('Ingrese una matriz para comenzar'),
-      );
-    } else if (state.processStatus.isLoading) {
-      return Center(
-        child: CircularProgressIndicator(
-          color: Theme.of(context).primaryColor,
-        ),
-      );
-    } else if (state.processStatus.isFailure) {
-      return const Center(
-        child: Text(
-          'Se produjo un error al procesar la matriz',
-          style: TextStyle(color: Colors.red),
-        ),
-      );
-    }
-    return Expanded(
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: state.matrix.map((row) {
-              return Row(
-                children: row.map((int value) {
-                  return Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(border: Border.all(width: 2)),
-                    child: Center(child: Text('$value')),
+        if (state.processStatus.isInitial) {
+          return const Center(
+            child: Text('Ingrese una matriz para comenzar'),
+          );
+        } else if (state.processStatus.isLoading) {
+          return Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).primaryColor,
+            ),
+          );
+        } else if (state.processStatus.isFailure) {
+          return Center(
+            child: Text(
+              state.errorMessage,
+              style: const TextStyle(color: Colors.red),
+            ),
+          );
+        }
+        return Expanded(
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: state.matrix.map((row) {
+                  return Row(
+                    children: row.map((int value) {
+                      return Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(border: Border.all(width: 2)),
+                        child: Center(
+                          child: Text(
+                            '$value',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   );
                 }).toList(),
-              );
-            }).toList(),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

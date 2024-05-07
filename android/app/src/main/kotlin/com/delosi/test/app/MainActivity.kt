@@ -1,4 +1,4 @@
-package com.delosi.test.app.delosi_test
+package com.delosi.test.app
 
 import io.flutter.embedding.android.FlutterActivity
 
